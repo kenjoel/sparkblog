@@ -13,12 +13,25 @@ class AppTest {
 
 
 
-public class PostTest {
+class PostTest {
+
+    @After
+    public void tearDown() {
+        post.clearAllPosts(); //clear out all the posts before each test.
+    }
 
     @Test
-    public void NewPostObjectGetsCorrectlyCreated_true() throws Exception {
-
+    public void AllPostsAreCorrectlyReturned_true() {
         post post = new post("Day 1: Intro");
-        assertEquals("Day 1: Intro", post.getContent());
+        post otherPost = new post ("How to pair successfully");
+        assertEquals(2, models.post.getAll());
+    }
+
+    @Test
+    public void AllPostsContainsAllPosts_true() {
+        post post = new post("Day 1: Intro");
+        post otherPost = new post ("How to pair successfully");
+        assertTrue(models.post.getAll());
+        assertTrue(post.getAll());
     }
 }
